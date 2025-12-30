@@ -1,0 +1,9 @@
+# Mac特有の隠しファイル
+.DS_Store
+Icon?
+Thumbs.db
+
+# (任意) その他よくある不要ファイル
+.AppleDouble
+.LSOverride
+.DS_Store
