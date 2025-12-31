@@ -1,0 +1,14 @@
+/* カスタムCSS - D&D 食屍鬼島キャンペーン リプレイ */
+
+/* 将来的にカスタマイズが必要な場合はここに追加 */
+
+/* 例: セリフの強調表示 */
+.dialogue {
+  font-style: italic;
+  color: var(--md-accent-fg-color);
+}
+
+/* 例: ナレーションの区別 */
+.narration {
+  opacity: 0.9;
+}

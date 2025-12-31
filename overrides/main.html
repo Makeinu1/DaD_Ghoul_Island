@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  <!-- 検索エンジン対策: インデックス登録を拒否 -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+
+  {{ super() }}
+{% endblock %}

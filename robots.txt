@@ -1,0 +1,22 @@
+# 検索エンジンクローラーを全て拒否
+User-agent: *
+Disallow: /
+
+# 特定の主要クローラーも明示的に拒否
+User-agent: Googlebot
+Disallow: /
+
+User-agent: Bingbot
+Disallow: /
+
+User-agent: Slurp
+Disallow: /
+
+User-agent: DuckDuckBot
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: YandexBot
+Disallow: /
