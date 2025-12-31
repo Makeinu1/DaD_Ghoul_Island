@@ -1,0 +1,112 @@
+site_name: D&D 食屍鬼島キャンペーン リプレイ
+site_description: D&D 5e版とクトゥルフの呼び声TRPGを混ぜたキャンペーン「食屍鬼島」のリプレイ小説
+site_author: まけいぬ、チョモラン、タツヤ、モクモク（DM）
+
+# 検索エンジン対策: インデックス登録を拒否
+# ※GitHubリポジトリ設定でも「検索エンジンへのインデックス登録」をオフにすること
+extra:
+  social: []
+  robots: noindex, nofollow
+
+# テーマ設定
+theme:
+  name: material
+  language: ja
+  custom_dir: docs/overrides  # カスタムテンプレート（robotsメタタグ用）
+  palette:
+    # ダークテーマ（食屍鬼島の雰囲気に合わせて）
+    - scheme: slate
+      primary: deep purple
+      accent: amber
+      toggle:
+        icon: material/brightness-4
+        name: ライトモードに切り替え
+    # ライトテーマ
+    - scheme: default
+      primary: deep purple
+      accent: amber
+      toggle:
+        icon: material/brightness-7
+        name: ダークモードに切り替え
+
+  features:
+    - navigation.instant      # 高速ページ遷移
+    - navigation.tracking     # URLにアンカーを追加
+    - navigation.tabs         # トップレベルナビをタブ化
+    - navigation.sections     # セクションをグループ化
+    - navigation.expand       # デフォルトで展開
+    - navigation.top          # トップへ戻るボタン
+    - search.suggest          # 検索候補表示
+    - search.highlight        # 検索結果ハイライト
+    - content.code.copy       # コードブロックのコピーボタン
+
+  icon:
+    repo: fontawesome/brands/github
+
+# ナビゲーション構成
+nav:
+  - はじめに: index.md
+  - キャラクター紹介: characters.md
+  - 世界観: world.md
+  - リプレイ本編:
+    - 第1回 レサンテ港からの旅立ち: replays/session01.md
+    - 第2回 嵐と異形の襲撃: replays/session02.md
+    - 第3回 ファルジーン島への上陸: replays/session03.md
+    - 第4回 ファルジーン市への道: replays/session04.md
+    - 第5回 ファルジーン市での探索: replays/session05.md
+    - 第6回 拘置所の騒動と地下道へ: replays/session06.md
+    - 第7回 血溜まり部屋の戦闘: replays/session07.md
+    - 第8回 グール氏族との対話: replays/session08.md
+    - 第9回 ゴート教団への旅: replays/session09.md
+    - 第10回 過去からの訪問者: replays/session10.md
+    - 第11回 墓地の秘密と死体泥棒: replays/session11.md
+
+# Markdownの拡張機能
+markdown_extensions:
+  - abbr                    # 略語
+  - admonition              # 警告ブロック
+  - attr_list               # HTML属性追加
+  - def_list                # 定義リスト
+  - footnotes               # 脚注
+  - meta                    # メタデータ
+  - toc:                    # 目次
+      permalink: true
+      toc_depth: 3
+  - pymdownx.arithmatex:    # 数式
+      generic: true
+  - pymdownx.betterem:      # 強調
+      smart_enable: all
+  - pymdownx.caret          # 挿入記号
+  - pymdownx.details        # 詳細ブロック
+  - pymdownx.emoji:         # 絵文字
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:     # コードハイライト
+      anchor_linenums: true
+  - pymdownx.inlinehilite   # インラインコードハイライト
+  - pymdownx.keys           # キーボードキー
+  - pymdownx.mark           # マーク
+  - pymdownx.smartsymbols   # スマート記号
+  - pymdownx.superfences    # コードブロック拡張
+  - pymdownx.tabbed:        # タブ
+      alternate_style: true
+  - pymdownx.tasklist:      # タスクリスト
+      custom_checkbox: true
+  - pymdownx.tilde          # 取り消し線
+
+# プラグイン
+plugins:
+  - search:                 # 検索機能
+      lang: ja
+      separator: '[\s\-\.]+'
+  - tags                    # タグ機能
+
+# 検索エンジン対策: robotsメタタグを全ページに追加
+extra_css:
+  - stylesheets/extra.css
+
+# カスタムHTMLヘッダー（robotsメタタグ）
+extra_javascript: []
+
+# Copyright
+copyright: Copyright &copy; 2025 D&D 食屍鬼島キャンペーン - PL: まけいぬ、チョモラン、タツヤ / DM: モクモク

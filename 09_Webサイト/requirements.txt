@@ -1,0 +1,11 @@
+# MkDocs本体
+mkdocs>=1.5.0
+
+# Material for MkDocsテーマ
+mkdocs-material>=9.5.0
+
+# Markdown拡張
+pymdown-extensions>=10.7.0
+
+# 検索機能の日本語対応
+mkdocs-material-extensions>=1.3.0

@@ -6,3 +6,7 @@ Thumbs.db
 # (任意) その他よくある不要ファイル
 .AppleDouble
 .LSOverride
+
+# MkDocsビルド成果物
+site/
+.cache/
