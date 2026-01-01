@@ -39,6 +39,11 @@ jobs:
 
       - name: Copy web content from source
         run: |
+          # 必要なディレクトリを作成
+          mkdir -p 09_Webサイト/docs/replays
+          mkdir -p 09_Webサイト/docs/characters
+          mkdir -p 09_Webサイト/docs/images
+
           # Webコンテンツをコピー（index.md, world.md）※characters.mdは不要に
           cp 05_リプレイ/_Webコンテンツ/index.md 09_Webサイト/docs/
           cp 05_リプレイ/_Webコンテンツ/world.md 09_Webサイト/docs/
@@ -57,7 +62,6 @@ jobs:
           cp "05_リプレイ/第11回_墓地の秘密と死体泥棒.md" "09_Webサイト/docs/replays/session11.md"
 
           # キャラクター評価をコピー＆画像パスを書き換え
-          mkdir -p 09_Webサイト/docs/characters
           sed 's|../06_イラスト/|../images/|g' "08_LLMによるキャラ評/巡礼者_キャラクター評.md" > "09_Webサイト/docs/characters/junreisha.md"
           sed 's|../06_イラスト/|../images/|g' "08_LLMによるキャラ評/ノクシル・グリムホルト_キャラクター評.md" > "09_Webサイト/docs/characters/noxil.md"
           sed 's|../06_イラスト/|../images/|g' "08_LLMによるキャラ評/シャルル・ビアトリス_キャラクター評.md" > "09_Webサイト/docs/characters/charles.md"
