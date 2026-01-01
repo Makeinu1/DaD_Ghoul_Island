@@ -360,19 +360,33 @@ feat: 第X回リプレイ小説「（タイトル）」を追加
 - Webサイトにも反映
 ```
 
-### 🌐 ステップ8: Webサイトへの反映 ★NEW
+### 🌐 ステップ8: Webサイトへの反映 ★自動化済み
 
 リプレイ完成後、GitHub Pages（Webサイト）も更新します。
 
+**✨ 重要: リプレイファイルは自動コピーされます**
+
+- リプレイは `05_リプレイ/` だけで管理すればOK
+- GitHub Actionsが自動的に `09_Webサイト/docs/replays/` にコピーします
+- 手動コピーは不要です！
+
 **手順:**
 
-1. **リプレイファイルをWebサイト用にコピー**
+1. **リプレイファイルを 05_リプレイ/ に保存** （すでに完了）
 
-```bash
-cp "05_リプレイ/第X回_（タイトル）.md" "09_Webサイト/docs/replays/sessionXX.md"
+2. **.github/workflows/deploy-mkdocs.yml に第X回を追加**
+
+`.github/workflows/deploy-mkdocs.yml` のコピー処理に1行追加：
+
+```yaml
+- name: Copy web content from source
+  run: |
+    ...
+    cp "05_リプレイ/第11回_墓地の秘密と死体泥棒.md" "09_Webサイト/docs/replays/session11.md"
+    cp "05_リプレイ/第X回_（タイトル）.md" "09_Webサイト/docs/replays/sessionXX.md"  # ← 追加
 ```
 
-2. **mkdocs.yml のナビゲーションに追加**
+3. **mkdocs.yml のナビゲーションに追加**
 
 `09_Webサイト/mkdocs.yml` を編集：
 
@@ -384,22 +398,27 @@ nav:
     - 第X回 （タイトル）: replays/sessionXX.md  # ← 追加
 ```
 
-3. **Gitにコミット＆プッシュ**
+4. **Gitにコミット＆プッシュ**
 
 ```bash
 git add .
-git commit -m "feat: Webサイトに第X回リプレイを追加"
+git commit -m "feat: 第X回リプレイを追加
+
+- 05_リプレイ/第X回_（タイトル）.md を作成
+- GitHub Actions設定とmkdocs.ymlを更新
+- 自動デプロイでWebサイトに反映"
 git push origin main
 ```
 
-4. **GitHub Actionsの自動デプロイを確認**
+5. **GitHub Actionsの自動デプロイを確認**
 
 - GitHubリポジトリの「Actions」タブで、自動デプロイが実行されることを確認
 - 2-3分後、https://（ユーザー名）.github.io/DaD_Ghoul_Island/ で第X回が表示される
 
 **チェックリスト:**
-- [ ] リプレイファイルを `09_Webサイト/docs/replays/` にコピー
-- [ ] `mkdocs.yml` のナビゲーションに追加
+- [ ] リプレイファイルを `05_リプレイ/第X回_*.md` に作成
+- [ ] `.github/workflows/deploy-mkdocs.yml` にコピー処理を追加
+- [ ] `09_Webサイト/mkdocs.yml` のナビゲーションに追加
 - [ ] Gitにコミット＆プッシュ
 - [ ] GitHub Actionsが正常に完了（緑色のチェックマーク）
 - [ ] Webサイトで第X回が表示されることを確認

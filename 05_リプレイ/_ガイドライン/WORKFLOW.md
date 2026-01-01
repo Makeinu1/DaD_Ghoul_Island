@@ -378,9 +378,67 @@ feat: 第X回リプレイ小説「（タイトル）」を追加
 
 ---
 
+## 🌐 ステップ8: Webサイトへの反映 ★自動化済み
+
+リプレイ完成後、GitHub Pages（Webサイト）も更新します。
+
+### 8-1. 重要：リプレイは自動コピーされます
+
+**✨ リプレイファイルは `05_リプレイ/` だけで管理すればOK**
+
+- GitHub Actionsが自動的に `09_Webサイト/docs/replays/` にコピーします
+- キャラクター紹介・世界観も `05_リプレイ/_Webコンテンツ/` だけで管理すればOK
+- 手動コピーは不要です！
+
+### 8-2. GitHub Actions設定を更新
+
+`.github/workflows/deploy-mkdocs.yml` のコピー処理に1行追加：
+
+```yaml
+- name: Copy web content from source
+  run: |
+    ...
+    cp "05_リプレイ/第11回_墓地の秘密と死体泥棒.md" "09_Webサイト/docs/replays/session11.md"
+    cp "05_リプレイ/第X回_（タイトル）.md" "09_Webサイト/docs/replays/sessionXX.md"  # ← 追加
+```
+
+### 8-3. mkdocs.yml のナビゲーションを更新
+
+`09_Webサイト/mkdocs.yml` を編集：
+
+```yaml
+nav:
+  - リプレイ本編:
+    ...
+    - 第11回 墓地の秘密と死体泥棒: replays/session11.md
+    - 第X回 （タイトル）: replays/sessionXX.md  # ← 追加
+```
+
+### 8-4. Gitにコミット＆プッシュ
+
+```bash
+git add .
+git commit -m "feat: 第X回リプレイを追加
+
+- 05_リプレイ/第X回_（タイトル）.md を作成
+- GitHub Actions設定とmkdocs.ymlを更新
+- PCおよびNPCキャラクター評価を更新
+- 自動デプロイでWebサイトに反映"
+git push origin main
+```
+
+### 8-5. デプロイを確認
+
+**チェックリスト:**
+- [ ] GitHubリポジトリの「Actions」タブで自動デプロイが実行中
+- [ ] GitHub Actionsが正常に完了（緑色のチェックマーク）
+- [ ] 2-3分後、https://（ユーザー名）.github.io/DaD_Ghoul_Island/ で第X回が表示される
+
+---
+
 ## 🎯 ワークフロー完了
 
-お疲れ様でした！第X回のリプレイ小説が完成しました。
+お疲れ様でした！第X回のリプレイ小説が完成し、Webサイトにも反映されました。
 
 **次のセッションまでに:**
 - [ ] 今回のワークフローで改善点があればメモ

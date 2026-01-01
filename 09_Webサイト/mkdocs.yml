@@ -46,8 +46,19 @@ theme:
 # ナビゲーション構成
 nav:
   - はじめに: index.md
-  - キャラクター紹介: characters.md
   - 世界観: world.md
+  - キャラクター紹介:
+    - PC:
+      - 巡礼者: characters/junreisha.md
+      - ノクシル・グリムホルト: characters/noxil.md
+      - シャルル・ビアトリス: characters/charles.md
+    - NPC:
+      - センサ船長: characters/censa.md
+      - ネギ: characters/negi.md
+      - ディードリド: characters/deedlit.md
+      - セラフィナ: characters/seraphina.md
+      - ルンジャタ: characters/runjata.md
+      - シマ: characters/shima.md
   - リプレイ本編:
     - 第1回 レサンテ港からの旅立ち: replays/session01.md
     - 第2回 嵐と異形の襲撃: replays/session02.md

@@ -10,3 +10,9 @@ Thumbs.db
 # MkDocsビルド成果物
 site/
 .cache/
+
+# 自動生成されるWebコンテンツ（05_リプレイ/ と 08_LLMによるキャラ評/ からコピーされる）
+09_Webサイト/docs/index.md
+09_Webサイト/docs/world.md
+09_Webサイト/docs/replays/*.md
+09_Webサイト/docs/characters/*.md
