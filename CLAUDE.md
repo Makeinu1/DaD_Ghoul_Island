@@ -525,8 +525,212 @@ docs: CLAUDE.mdを更新
 refactor: リプレイテンプレートを改善
 ```
 
+---
+
+## Webサイトデプロイ手順
+
+このプロジェクトでは、MkDocsを使用してGitHub Pagesで静的サイトを公開しています。
+
+### ⚙️ 自動生成ファイルの仕組み
+
+**重要:** 以下のファイルは `.gitignore` で除外され、**自動生成される**ため、手動で編集しないでください。
+
+```
+09_Webサイト/docs/index.md           # 05_リプレイ/_Webコンテンツ/ からコピー
+09_Webサイト/docs/world.md           # 05_リプレイ/_Webコンテンツ/ からコピー
+09_Webサイト/docs/replays/*.md       # 05_リプレイ/ からコピー（session01.md - session11.md形式）
+09_Webサイト/docs/characters/*.md    # 08_LLMによるキャラ評/ からコピー（画像パス自動修正）
+```
+
+### 📋 デプロイ手順（第12回以降の新規セッション追加時）
+
+#### Step 1: リプレイファイルをWebサイトにコピー
+
+```bash
+cd /Users/shumpeiabe/Desktop/StableDiffusion/GitHub/DaD_Ghoul_Island
+
+# リプレイファイルをコピー（ファイル名を session12.md 形式に変更）
+cp "05_リプレイ/第12回_（タイトル）.md" "09_Webサイト/docs/replays/session12.md"
+```
+
+#### Step 2: キャラクター評価ファイルを更新（必要に応じて）
+
+新しいNPCが登場した場合：
+
+```bash
+# 新しいNPCのキャラ評をコピー
+cp "08_LLMによるキャラ評/NPC_（新キャラ名）_キャラクター評.md" "09_Webサイト/docs/characters/（新キャラ名英語）.md"
+
+# 画像パスを修正（../06_イラスト/ → ../images/）
+cd "09_Webサイト/docs/characters"
+sed -i '' 's|../06_イラスト/|../images/|g' （新キャラ名英語）.md
+```
+
+新しいNPCのイラストがある場合：
+
+```bash
+# イラストをコピー
+cp "06_イラスト/NPC_（新キャラ名）.（拡張子）" "09_Webサイト/docs/images/"
+```
+
+#### Step 3: mkdocs.ymlのnavセクションを更新
+
+`09_Webサイト/mkdocs.yml` を編集し、新しいセッションを追加：
+
+```yaml
+nav:
+  - はじめに: index.md
+  - 世界観: world.md
+  - キャラクター紹介:
+    - PC:
+      - 巡礼者: characters/junreisha.md
+      - ノクシル・グリムホルト: characters/noxil.md
+      - シャルル・ビアトリス: characters/charles.md
+    - NPC:
+      - センサ船長: characters/censa.md
+      - ネギ: characters/negi.md
+      - ディードリド: characters/deedlit.md
+      - セラフィナ: characters/seraphina.md
+      - ルンジャタ: characters/runjata.md
+      - シマ: characters/shima.md
+      - （新キャラ名）: characters/（新キャラ名英語）.md  # 新規追加
+  - リプレイ本編:
+    - 第1回 レサンテ港からの旅立ち: replays/session01.md
+    # ... 既存のセッション ...
+    - 第12回 （タイトル）: replays/session12.md  # 新規追加
+```
+
+#### Step 4: index.mdを更新（必要に応じて）
+
+`05_リプレイ/_Webコンテンツ/index.md` を編集し、新しいセッションを追加：
+
+```markdown
+### 第10～12回: （セクション名）
+
+- [第10回 過去からの訪問者](replays/session10.md)
+  ノクシルの過去が明らかになる。かつての仲間との再会は、彼にとって何を意味するのか。
+
+- [第11回 墓地の秘密と死体泥棒](replays/session11.md)
+  墓地で起きている奇妙な事件。死体泥棒の正体を追う一行は、さらなる謎に迫る。
+
+- [第12回 （タイトル）](replays/session12.md)
+  （あらすじ）
+```
+
+編集後、Webサイトにコピー：
+
+```bash
+cp "05_リプレイ/_Webコンテンツ/index.md" "09_Webサイト/docs/"
+```
+
+#### Step 5: サイトをビルドしてデプロイ
+
+```bash
+cd "09_Webサイト"
+
+# サイトをビルド（警告がないか確認）
+mkdocs build --clean
+
+# GitHub Pagesにデプロイ
+mkdocs gh-deploy --force
+```
+
+#### Step 6: 変更をGitコミット
+
+```bash
+cd /Users/shumpeiabe/Desktop/StableDiffusion/GitHub/DaD_Ghoul_Island
+
+# 変更をステージング
+git add -A
+
+# コミット
+git commit -m "Add: 第12回リプレイをWebサイトに追加
+
+- 第12回のリプレイページを追加
+- mkdocs.ymlのnavセクションを更新
+- index.mdに第12回のあらすじを追加
+- （必要に応じて）新NPCのキャラクターページとイラストを追加"
+
+# プッシュ
+git push origin main
+```
+
+### 🔍 デプロイ時のチェックリスト
+
+- [ ] リプレイファイルのコピー完了（session形式に変更）
+- [ ] 新NPCのキャラ評とイラストをコピー（必要に応じて）
+- [ ] mkdocs.ymlのnavセクション更新
+- [ ] index.mdの更新（セクション追加、あらすじ記載）
+- [ ] 画像パスの修正（キャラクターページ）
+- [ ] `mkdocs build --clean` で警告なし
+- [ ] `mkdocs gh-deploy --force` でデプロイ完了
+- [ ] Gitコミット・プッシュ完了
+- [ ] サイト表示確認（1～2分待ってから）
+  - https://Makeinu1.github.io/DaD_Ghoul_Island/
+  - CSSが正しく表示されているか
+  - 新しいリプレイページが表示されるか
+  - キャラクターページの画像が表示されるか
+
+### 📝 よくあるトラブルシューティング
+
+#### 1. CSSが崩れている
+
+**原因:** `site_url` が mkdocs.yml に設定されていない
+
+**解決策:**
+```yaml
+site_url: https://Makeinu1.github.io/DaD_Ghoul_Island/
+```
+
+#### 2. 404エラーが発生する
+
+**原因:** mkdocs.yml の nav セクションとファイルパスが一致していない
+
+**解決策:** navセクションのパスとファイルパスを確認
+
+#### 3. 画像が表示されない
+
+**原因:** 画像パスが間違っている（`../06_イラスト/` のまま）
+
+**解決策:**
+```bash
+cd "09_Webサイト/docs/characters"
+sed -i '' 's|../06_イラスト/|../images/|g' *.md
+```
+
+#### 4. ビルド時に警告が出る
+
+**原因:** リンク先のファイルが存在しない、またはアンカーが間違っている
+
+**解決策:** 警告メッセージを確認し、該当ファイルを修正
+
+### 🎯 Claudeへの依頼例
+
+```
+第12回のリプレイをWebサイトに追加してください。
+
+【実施内容】
+1. 05_リプレイ/第12回_（タイトル）.md を 09_Webサイト/docs/replays/session12.md にコピー
+2. mkdocs.yml の nav セクションに第12回を追加
+3. 05_リプレイ/_Webコンテンツ/index.md を更新し、09_Webサイト/docs/ にコピー
+4. サイトをビルドしてデプロイ
+5. Gitコミット・プッシュ
+
+【確認事項】
+- ビルド時に警告が出ないこと
+- デプロイ後にサイトが正常に表示されること
+```
+
+---
+
 ## 更新履歴
 
+- **2026-01-02**:
+  - Webサイトデプロイ手順をCLAUDE.mdに追加
+  - index.md、world.md、キャラクターページ（PC 3つ + NPC 6つ）を自動生成方式で配置
+  - .gitignoreで自動生成ファイルを除外する設計に変更
+  - GitHub Pagesへのデプロイ完了（https://Makeinu1.github.io/DaD_Ghoul_Island/）
+  - mkdocs.ymlにsite_url、repo_url、repo_nameを追加してCSS問題を解決
 - **2025-12-31**:
   - 第11回リプレイ完成
   - 全11回のリプレイに文体統一・セリフ洗練化を適用
