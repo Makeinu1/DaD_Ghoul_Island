@@ -1,6 +1,9 @@
 site_name: D&D 食屍鬼島キャンペーン リプレイ
+site_url: https://Makeinu1.github.io/DaD_Ghoul_Island/
 site_description: D&D 5e版とクトゥルフの呼び声TRPGを混ぜたキャンペーン「食屍鬼島」のリプレイ小説
 site_author: まけいぬ、チョモラン、タツヤ、モクモク（DM）
+repo_url: https://github.com/Makeinu1/DaD_Ghoul_Island
+repo_name: Makeinu1/DaD_Ghoul_Island
 
 # 検索エンジン対策: インデックス登録を拒否
 # ※GitHubリポジトリ設定でも「検索エンジンへのインデックス登録」をオフにすること
