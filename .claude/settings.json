@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdocs build:*)",
+      "Bash(mkdocs gh-deploy:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Read(04_プレイヤーログ/**)",
+      "Read(07_セッション音声ログ/**)",
+      "Read(05_リプレイ/**)",
+      "Read(08_LLMによるキャラ評/**)",
+      "Read(.claude/**)"
+    ],
+    "deny": [
+      "Read(.env)",
+      "Read(.env.*)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '✅ ファイル更新: '$CLAUDE_TOOL_INPUT_FILE_PATH",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
