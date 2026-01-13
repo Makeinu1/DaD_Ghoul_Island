@@ -98,3 +98,69 @@ MkDocsのURL規則：
 ✅ /replays/session12/
 ❌ /replays/session12.md
 ```
+
+---
+
+## デプロイ方法
+
+### 方法1: GitHub Actions 自動デプロイ（推奨）
+
+mainブランチにプッシュすると自動でデプロイされます。
+
+```bash
+# 変更をコミット
+git add -A
+git commit -m "Add: 第X回リプレイを追加"
+
+# プッシュ → 自動でGitHub Actionsがデプロイ
+git push origin main
+```
+
+**新しいセッション追加時の追加手順**:
+
+1. `.github/workflows/deploy-mkdocs.yml` にcpコマンドを追加
+2. `09_Webサイト/mkdocs.yml` のnavセクションに追加
+
+### 方法2: 手動デプロイ（ローカルから直接）
+
+GitHub Actionsを使わず、ローカルから直接デプロイする方法。
+
+```bash
+# プロジェクトディレクトリに移動
+cd /Users/shumpeiabe/Desktop/StableDiffusion/GitHub/DaD_Ghoul_Island
+
+# Webサイトディレクトリに移動
+cd 09_Webサイト
+
+# ビルド（エラーチェック）
+mkdocs build --clean
+
+# デプロイ（gh-pagesブランチに直接プッシュ）
+mkdocs gh-deploy --force
+
+# メインブランチに戻ってコミット・プッシュ
+cd ..
+git add -A
+git commit -m "Add: 第X回リプレイを追加"
+git push origin main
+```
+
+**手動デプロイが必要な場面**:
+- GitHub Actionsが失敗したとき
+- 緊急で反映が必要なとき
+- ローカルでビルド確認したいとき
+
+---
+
+## GitHub Actions ワークフロー
+
+`.github/workflows/deploy-mkdocs.yml` が自動デプロイを担当。
+
+**新規セッション追加時の更新箇所**:
+
+```yaml
+# 51-64行目付近に追加
+cp "05_リプレイ/完成版/第XX回_タイトル.md" "09_Webサイト/docs/replays/sessionXX.md"
+```
+
+**注意**: workflowファイルを更新するには、Personal Access Tokenに `workflow` スコープが必要。
