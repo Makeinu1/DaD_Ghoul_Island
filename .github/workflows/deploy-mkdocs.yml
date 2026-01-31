@@ -62,6 +62,7 @@ jobs:
           cp "05_リプレイ/完成版/第10回_過去からの訪問者.md" "09_Webサイト/docs/replays/session10.md"
           cp "05_リプレイ/完成版/第11回_墓地の秘密と死体泥棒.md" "09_Webサイト/docs/replays/session11.md"
           cp "05_リプレイ/完成版/第12回_地下に潜む影.md" "09_Webサイト/docs/replays/session12.md"
+          cp "05_リプレイ/完成版/第13回_古き友の遺産.md" "09_Webサイト/docs/replays/session13.md"
 
           # キャラクター評価をコピー＆画像パスを書き換え
           sed 's|../06_イラスト/|../images/|g' "08_LLMによるキャラ評/巡礼者_キャラクター評.md" > "09_Webサイト/docs/characters/junreisha.md"
